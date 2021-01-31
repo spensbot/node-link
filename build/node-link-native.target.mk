@@ -48,13 +48,13 @@ CFLAGS_OBJC_Debug :=
 CFLAGS_OBJCC_Debug :=
 
 INCS_Debug := \
-	-I/Users/Spenser/Documents/Dev/node-link/8.3.4/include/node \
-	-I/Users/Spenser/Documents/Dev/node-link/8.3.4/src \
-	-I/Users/Spenser/Documents/Dev/node-link/8.3.4/deps/openssl/config \
-	-I/Users/Spenser/Documents/Dev/node-link/8.3.4/deps/openssl/openssl/include \
-	-I/Users/Spenser/Documents/Dev/node-link/8.3.4/deps/uv/include \
-	-I/Users/Spenser/Documents/Dev/node-link/8.3.4/deps/zlib \
-	-I/Users/Spenser/Documents/Dev/node-link/8.3.4/deps/v8/include \
+	-I/Users/Spenser/Library/Caches/node-gyp/12.14.0/include/node \
+	-I/Users/Spenser/Library/Caches/node-gyp/12.14.0/src \
+	-I/Users/Spenser/Library/Caches/node-gyp/12.14.0/deps/openssl/config \
+	-I/Users/Spenser/Library/Caches/node-gyp/12.14.0/deps/openssl/openssl/include \
+	-I/Users/Spenser/Library/Caches/node-gyp/12.14.0/deps/uv/include \
+	-I/Users/Spenser/Library/Caches/node-gyp/12.14.0/deps/zlib \
+	-I/Users/Spenser/Library/Caches/node-gyp/12.14.0/deps/v8/include \
 	-I/Users/Spenser/Documents/Dev/node-link/node_modules/node-addon-api \
 	-I$(srcdir)/lib/link/include \
 	-I$(srcdir)/lib/link/modules/asio-standalone/asio/include
@@ -102,13 +102,13 @@ CFLAGS_OBJC_Release :=
 CFLAGS_OBJCC_Release :=
 
 INCS_Release := \
-	-I/Users/Spenser/Documents/Dev/node-link/8.3.4/include/node \
-	-I/Users/Spenser/Documents/Dev/node-link/8.3.4/src \
-	-I/Users/Spenser/Documents/Dev/node-link/8.3.4/deps/openssl/config \
-	-I/Users/Spenser/Documents/Dev/node-link/8.3.4/deps/openssl/openssl/include \
-	-I/Users/Spenser/Documents/Dev/node-link/8.3.4/deps/uv/include \
-	-I/Users/Spenser/Documents/Dev/node-link/8.3.4/deps/zlib \
-	-I/Users/Spenser/Documents/Dev/node-link/8.3.4/deps/v8/include \
+	-I/Users/Spenser/Library/Caches/node-gyp/12.14.0/include/node \
+	-I/Users/Spenser/Library/Caches/node-gyp/12.14.0/src \
+	-I/Users/Spenser/Library/Caches/node-gyp/12.14.0/deps/openssl/config \
+	-I/Users/Spenser/Library/Caches/node-gyp/12.14.0/deps/openssl/openssl/include \
+	-I/Users/Spenser/Library/Caches/node-gyp/12.14.0/deps/uv/include \
+	-I/Users/Spenser/Library/Caches/node-gyp/12.14.0/deps/zlib \
+	-I/Users/Spenser/Library/Caches/node-gyp/12.14.0/deps/v8/include \
 	-I/Users/Spenser/Documents/Dev/node-link/node_modules/node-addon-api \
 	-I$(srcdir)/lib/link/include \
 	-I$(srcdir)/lib/link/modules/asio-standalone/asio/include

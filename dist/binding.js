@@ -8,5 +8,14 @@ class NodeLink {
     getSessionInfoCurrent() {
         return this._addonInstance.getSessionInfoCurrent();
     }
+
+    enable(isEnable) {
+        return this._addonInstance.enable(isEnable);
+    }
+
+    setTempo(newBpm) {
+        return this._addonInstance.setTempo(newBpm);
+    }
+
 }
 module.exports = NodeLink;

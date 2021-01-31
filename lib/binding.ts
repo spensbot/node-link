@@ -1,10 +1,11 @@
 const addon = require('../build/Release/node-link-native');
 
 interface LinkSessionInfo {
-    numPeers: Number,
-    bpm: Number,
-    phase: Number,
-    beats: Number
+    numPeers: number,
+    bpm: number,
+    phase: number,
+    beats: number,
+    isEnabled: boolean
 }
 
 interface INodeLinkNative

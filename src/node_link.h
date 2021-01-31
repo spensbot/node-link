@@ -39,6 +39,7 @@ private:
         obj.Set("bpm", sessionState.tempo());
         obj.Set("phase", sessionState.phaseAtTime(time, quantum));
         obj.Set("beats", sessionState.beatAtTime(time, quantum));
+        obj.Set("isEnabled", _link.isEnabled());
         return obj;
     }
 
