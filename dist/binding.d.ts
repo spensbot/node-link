@@ -2,6 +2,7 @@ interface LinkSessionInfo {
     numPeers: Number;
     bpm: Number;
     phase: Number;
+    beats: Number;
 }
 declare class NodeLink {
     constructor();

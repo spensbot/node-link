@@ -2,7 +2,7 @@
 
 NodeLink::NodeLink(const Napi::CallbackInfo& info) : ObjectWrap(info), _link(120.0) {
     this->_link.enable(true);
-    this->_link.enableStartStopSync(true);
+    // this->_link.enableStartStopSync(true);
 }
 
 Napi::Value NodeLink::GetSessionInfoCurrent(const Napi::CallbackInfo& info) {
@@ -11,9 +11,47 @@ Napi::Value NodeLink::GetSessionInfoCurrent(const Napi::CallbackInfo& info) {
     return GetSessionInfoAtTime(env, quantum, GetCurrentTime());
 }
 
+void NodeLink::Enable(const Napi::CallbackInfo& info) {
+    auto env = info.Env();
+
+    if (info.Length() < 1) {
+        Napi::TypeError::New(env, "Too few arguments. 1 bool required").ThrowAsJavaScriptException();
+        return;
+    }
+
+    if (!info[0].IsBoolean()) {
+        Napi::TypeError::New(env, "Wrong arguments. Bool required.").ThrowAsJavaScriptException();
+        return;
+    }
+
+    _link.enable(info[0].As<Napi::Boolean>());
+}
+
+void NodeLink::SetTempo(const Napi::CallbackInfo& info) {
+    auto env = info.Env();
+
+    if (info.Length() < 1) {
+        Napi::TypeError::New(env, "Too Few Arguments. 1 double required").ThrowAsJavaScriptException();
+        return;
+    }
+
+    if (!info[0].IsNumber()) {
+        Napi::TypeError::New(env, "Wrong arguments. Bool required").ThrowAsJavaScriptException();
+        return;
+    }
+
+    double newTempo = info[0].As<Napi::Number>().DoubleValue();
+
+    auto sessionState = _link.captureAppSessionState();
+    sessionState.setTempo(newTempo, GetCurrentTime());
+    _link.commitAppSessionState(sessionState);
+};
+
 Napi::Function NodeLink::GetClass(Napi::Env env) {
     return DefineClass(env, "NodeLink", {
         NodeLink::InstanceMethod("getSessionInfoCurrent", &NodeLink::GetSessionInfoCurrent),
+        NodeLink::InstanceMethod("enable", &NodeLink::Enable),
+        NodeLink::InstanceMethod("setTempo", &NodeLink::SetTempo),
     });
 }
 

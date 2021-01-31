@@ -14,15 +14,15 @@ public:
     // Get link session info at the time the function is called.
     // NOTE: By the time this value is processed and used for outputs, these times will likely be outdated.
     //       To synchronize Link programs, the goal should be to process samples given session info for the time of program output.
-    Napi::Value GetSessionInfoCurrent(const Napi::CallbackInfo&);
+    Napi::Value GetSessionInfoCurrent(const Napi::CallbackInfo &);
 
     // NOTE: Get link session info at the time the function is called plus the offset (microseconds).
     //       This offset can be used to account for process/buffer time between function call and program output.
-    Napi::Object GetSessionInfoOffset(const Napi::CallbackInfo& info) {
-        auto quantum = 4.0;
-        auto offset_micros = std::chrono::microseconds{20000};
-        return GetSessionInfoAtTime(info.Env(), quantum, GetCurrentTime() + offset_micros);
-    }
+    Napi::Value GetSessionInfoOffset(const Napi::CallbackInfo &);
+
+    void Enable(const Napi::CallbackInfo &);
+
+    void SetTempo(const Napi::CallbackInfo &);
 
 private:
     ableton::Link _link;
@@ -38,6 +38,7 @@ private:
         obj.Set("numPeers", _link.numPeers());
         obj.Set("bpm", sessionState.tempo());
         obj.Set("phase", sessionState.phaseAtTime(time, quantum));
+        obj.Set("beats", sessionState.beatAtTime(time, quantum));
         return obj;
     }
 

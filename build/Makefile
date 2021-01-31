@@ -40,9 +40,9 @@ all_deps :=
 
 
 
-CC.target ?= /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
+CC.target ?= $(CC)
 CFLAGS.target ?= $(CPPFLAGS) $(CFLAGS)
-CXX.target ?= /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
+CXX.target ?= $(CXX)
 CXXFLAGS.target ?= $(CPPFLAGS) $(CXXFLAGS)
 LINK.target ?= $(LINK)
 LDFLAGS.target ?= $(LDFLAGS)
@@ -53,9 +53,9 @@ LINK ?= $(CXX.target)
 
 # TODO(evan): move all cross-compilation logic to gyp-time so we don't need
 # to replicate this environment fallback in make as well.
-CC.host ?= /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
+CC.host ?= gcc
 CFLAGS.host ?= $(CPPFLAGS_host) $(CFLAGS_host)
-CXX.host ?= /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
+CXX.host ?= g++
 CXXFLAGS.host ?= $(CPPFLAGS_host) $(CXXFLAGS_host)
 LINK.host ?= $(CXX.host)
 LDFLAGS.host ?=
@@ -332,7 +332,7 @@ endif
 
 quiet_cmd_regen_makefile = ACTION Regenerating $@
 cmd_regen_makefile = cd $(srcdir); /Users/Spenser/Documents/Web-Design/captivate4/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/Users/Spenser/Documents/Dev/node-link/8.3.4" "-Dnode_gyp_dir=/Users/Spenser/Documents/Web-Design/captivate4/node_modules/node-gyp" "-Dnode_lib_file=/Users/Spenser/Documents/Dev/node-link/8.3.4/<(target_arch)/node.lib" "-Dmodule_root_dir=/Users/Spenser/Documents/Dev/node-link" "-Dnode_engine=v8" "--depth=." "-Goutput_dir=." "--generator-output=build" -I/Users/Spenser/Documents/Dev/node-link/build/config.gypi -I/Users/Spenser/Documents/Web-Design/captivate4/node_modules/node-gyp/addon.gypi -I/Users/Spenser/Documents/Dev/node-link/8.3.4/include/node/common.gypi "--toplevel-dir=." binding.gyp
-Makefile: $(srcdir)/node_modules/node-addon-api/node_api.gyp $(srcdir)/8.3.4/include/node/common.gypi $(srcdir)/binding.gyp $(srcdir)/build/config.gypi $(srcdir)/../../Web-Design/captivate4/node_modules/node-gyp/addon.gypi
+Makefile: $(srcdir)/binding.gyp $(srcdir)/../../Web-Design/captivate4/node_modules/node-gyp/addon.gypi $(srcdir)/8.3.4/include/node/common.gypi $(srcdir)/build/config.gypi $(srcdir)/node_modules/node-addon-api/node_api.gyp
 	$(call do_cmd,regen_makefile)
 
 # "all" is a concatenation of the "all" targets from all the included
