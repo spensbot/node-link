@@ -12,6 +12,10 @@
     ],
     "typeRoots": [
       "node_modules/@types"
-    ]
-  }
+    ],
+  },
+  "exclude": [
+    "lib/link",
+    "./dist"
+  ]
 }

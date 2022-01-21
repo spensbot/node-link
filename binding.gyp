@@ -9,7 +9,9 @@
         ['OS=="mac"', {'defines': ['LINK_PLATFORM_MACOSX=1']}],
       ],
       'include_dirs': [
+        # "<!@(node -p \"require('node-addon-api').include\")",
         "<!@(node -p \"require('node-addon-api').include\")",
+        "<!(node -p \"require('node-addon-api').include_dir\")",
         "lib/link/include",
         "lib/link/modules/asio-standalone/asio/include"
       ],

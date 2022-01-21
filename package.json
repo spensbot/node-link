@@ -1,6 +1,9 @@
 {
     "main": "lib/binding.js",
     "scripts": {
+        "clean": "node-gyp clean",
+        "configure": "node-gyp configure",
+        "build": "node-gyp build",
         "pretest": "tsc",
         "test": "node --napi-modules ./test/test_binding.js"
     },
