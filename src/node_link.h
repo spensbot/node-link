@@ -24,6 +24,10 @@ public:
 
     void SetTempo(const Napi::CallbackInfo &);
 
+    void SetIsPlaying(const Napi::CallbackInfo &);
+
+    void EnableStartStopSync(const Napi::CallbackInfo &);
+
 private:
     ableton::Link _link;
 
@@ -40,6 +44,8 @@ private:
         obj.Set("phase", sessionState.phaseAtTime(time, quantum));
         obj.Set("beats", sessionState.beatAtTime(time, quantum));
         obj.Set("isEnabled", _link.isEnabled());
+        obj.Set("isPlaying", sessionState.isPlaying());
+        obj.Set("isStartStopSyncEnabled", _link.isStartStopSyncEnabled());
         return obj;
     }
 
