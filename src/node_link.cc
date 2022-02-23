@@ -88,6 +88,8 @@ Napi::Function NodeLink::GetClass(Napi::Env env) {
         NodeLink::InstanceMethod("getSessionInfoCurrent", &NodeLink::GetSessionInfoCurrent),
         NodeLink::InstanceMethod("enable", &NodeLink::Enable),
         NodeLink::InstanceMethod("setTempo", &NodeLink::SetTempo),
+        NodeLink::InstanceMethod("setIsPlaying", &NodeLink::SetIsPlaying),
+        NodeLink::InstanceMethod("enableStartStopSync", &NodeLink::EnableStartStopSync)
     });
 }
 
