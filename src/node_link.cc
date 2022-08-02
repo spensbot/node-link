@@ -1,3 +1,4 @@
+#include <malloc.h> // Required to fix C3861: '_alloca': identifier not found error in asio
 #include "node_link.h"
 
 NodeLink::NodeLink(const Napi::CallbackInfo& info) : ObjectWrap(info), _link(120.0) {
