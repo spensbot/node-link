@@ -1,4 +1,7 @@
+#if LINK_PLATFORM_WINDOWS
 #include <malloc.h> // Required to fix C3861: '_alloca': identifier not found error in asio
+#endif
+
 #include "node_link.h"
 
 NodeLink::NodeLink(const Napi::CallbackInfo& info) : ObjectWrap(info), _link(120.0) {
