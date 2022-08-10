@@ -40,7 +40,7 @@ class NodeLink {
   }
 
   enableStartStopSync(isEnable: boolean) {
-    return this._addonInstance.enable(isEnable)
+    return this._addonInstance.enableStartStopSync(isEnable)
   }
 
   // private members
