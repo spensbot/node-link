@@ -22,6 +22,10 @@ public:
 
     void Enable(const Napi::CallbackInfo &);
 
+    void RequestBeat(const Napi::CallbackInfo &);
+
+    void ForceBeat(const Napi::CallbackInfo &);
+
     void SetTempo(const Napi::CallbackInfo &);
 
     void SetIsPlaying(const Napi::CallbackInfo &);

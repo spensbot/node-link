@@ -13,6 +13,8 @@ interface LinkSessionInfo {
 interface INodeLinkNative {
   getSessionInfoCurrent(): LinkSessionInfo
   enable(isEnable: boolean): void
+  requestBeat(beat: number): void,
+  forceBeat(beat: number): void,
   setTempo(newBpm: number): void
   setIsPlaying(isPlaying: boolean): void
   enableStartStopSync(isEnable: boolean): void
@@ -29,6 +31,14 @@ class NodeLink {
 
   enable(isEnable: boolean) {
     return this._addonInstance.enable(isEnable)
+  }
+
+  requestBeat(beat: number): void {
+    return this._addonInstance.requestBeat(beat)
+  }
+
+  forceBeat(beat: number): void {
+    return this._addonInstance.forceBeat(beat)
   }
 
   setTempo(newBpm: number) {

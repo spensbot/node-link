@@ -4,6 +4,12 @@
 
 #include "node_link.h"
 
+namespace {
+
+double DEFAULT_QUANTUM = 4.0;
+
+}; // anonymous namespace
+
 NodeLink::NodeLink(const Napi::CallbackInfo& info) : ObjectWrap(info), _link(120.0) {
     this->_link.enable(true);
     // this->_link.enableStartStopSync(true);
@@ -11,8 +17,7 @@ NodeLink::NodeLink(const Napi::CallbackInfo& info) : ObjectWrap(info), _link(120
 
 Napi::Value NodeLink::GetSessionInfoCurrent(const Napi::CallbackInfo& info) {
     auto env = info.Env();
-    auto quantum = 4.0;
-    return GetSessionInfoAtTime(env, quantum, GetCurrentTime());
+    return GetSessionInfoAtTime(env, DEFAULT_QUANTUM, GetCurrentTime());
 }
 
 void NodeLink::Enable(const Napi::CallbackInfo& info) {
@@ -48,6 +53,46 @@ void NodeLink::SetTempo(const Napi::CallbackInfo& info) {
 
     auto sessionState = _link.captureAppSessionState();
     sessionState.setTempo(newTempo, GetCurrentTime());
+    _link.commitAppSessionState(sessionState);
+};
+
+void NodeLink::RequestBeat(const Napi::CallbackInfo& info) {
+    auto env = info.Env();
+
+    if (info.Length() < 1) {
+        Napi::TypeError::New(env, "Too Few Arguments. 1 double required").ThrowAsJavaScriptException();
+        return;
+    }
+
+    if (!info[0].IsNumber()) {
+        Napi::TypeError::New(env, "Wrong arguments. Number required").ThrowAsJavaScriptException();
+        return;
+    }
+
+    double newBeat = info[0].As<Napi::Number>().DoubleValue();
+
+    auto sessionState = _link.captureAppSessionState();
+    sessionState.requestBeatAtTime(newBeat, GetCurrentTime(), DEFAULT_QUANTUM);
+    _link.commitAppSessionState(sessionState);
+};
+
+void NodeLink::ForceBeat(const Napi::CallbackInfo& info) {
+    auto env = info.Env();
+
+    if (info.Length() < 1) {
+        Napi::TypeError::New(env, "Too Few Arguments. 1 double required").ThrowAsJavaScriptException();
+        return;
+    }
+
+    if (!info[0].IsNumber()) {
+        Napi::TypeError::New(env, "Wrong arguments. Number required").ThrowAsJavaScriptException();
+        return;
+    }
+
+    double newBeat = info[0].As<Napi::Number>().DoubleValue();
+
+    auto sessionState = _link.captureAppSessionState();
+    sessionState.forceBeatAtTime(newBeat, GetCurrentTime(), DEFAULT_QUANTUM);
     _link.commitAppSessionState(sessionState);
 };
 
@@ -91,6 +136,8 @@ Napi::Function NodeLink::GetClass(Napi::Env env) {
     return DefineClass(env, "NodeLink", {
         NodeLink::InstanceMethod("getSessionInfoCurrent", &NodeLink::GetSessionInfoCurrent),
         NodeLink::InstanceMethod("enable", &NodeLink::Enable),
+        NodeLink::InstanceMethod("requestBeat", &NodeLink::RequestBeat),
+        NodeLink::InstanceMethod("forceBeat", &NodeLink::ForceBeat),
         NodeLink::InstanceMethod("setTempo", &NodeLink::SetTempo),
         NodeLink::InstanceMethod("setIsPlaying", &NodeLink::SetIsPlaying),
         NodeLink::InstanceMethod("enableStartStopSync", &NodeLink::EnableStartStopSync)
