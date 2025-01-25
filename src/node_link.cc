@@ -40,7 +40,7 @@ void NodeLink::SetTempo(const Napi::CallbackInfo& info) {
     }
 
     if (!info[0].IsNumber()) {
-        Napi::TypeError::New(env, "Wrong arguments. Bool required").ThrowAsJavaScriptException();
+        Napi::TypeError::New(env, "Wrong arguments. Number required").ThrowAsJavaScriptException();
         return;
     }
 
